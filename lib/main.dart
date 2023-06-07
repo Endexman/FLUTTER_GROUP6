@@ -103,6 +103,11 @@ class _NewUserPageState extends State<NewUserPage> {
                   ),
                 ),
                 obscureText: !_passwordVisible,
+                validator: (value) {
+                  if (value == null  !RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$').hasMatch(value)) {
+                    return 'A minimum 8 characters password containing a combination of uppercase and lowercase letters and numbers is required';
+                  }
+                  return null; },
                 onChanged: (value) {
                   setState(() {
                     _password = value;
