@@ -104,7 +104,11 @@ class _NewUserPageState extends State<NewUserPage> {
                 ),
                 obscureText: !_passwordVisible,
                 validator: (value) {
-                  if (value == null  !RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$').hasMatch(value)) {
+                  if (value == null || value.isEmpty) {
+                    return 'Password is a required field.';
+                  }
+                  
+                  if (value.length < 8  ||  !RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$').hasMatch(value)) {
                     return 'A minimum 8 characters password containing a combination of uppercase and lowercase letters and numbers is required';
                   }
                   return null; },
@@ -119,6 +123,15 @@ class _NewUserPageState extends State<NewUserPage> {
                   labelText: 'Retype Password',
                 ),
                 obscureText: true,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please retype your password';
+                  }
+                  if (value != _password) {
+                    return 'Passwords is not match.';
+                  }
+                  return null;
+                },
                 onChanged: (value) {
                   setState(() {
                     _retypePassword = value;
