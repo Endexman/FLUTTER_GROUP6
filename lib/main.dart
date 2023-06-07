@@ -71,6 +71,15 @@ class _NewUserPageState extends State<NewUserPage> {
               ),
               TextFormField(
                 decoration: InputDecoration(labelText: 'Email'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Email is a required field.';
+                  }
+                  if (!RegExp(r'^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$').hasMatch(value)) {
+                    return 'Invalid email type.';
+                  }
+                  return null;
+                },
                 onChanged: (value) {
                   setState(() {
                     _email = value;
