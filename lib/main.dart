@@ -75,7 +75,9 @@ class _NewUserPageState extends State<NewUserPage> {
                   if (value == null || value.isEmpty) {
                     return 'Email is a required field.';
                   }
-                  if (!RegExp(r'^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$').hasMatch(value)) {
+                  if (!RegExp(
+                          r'^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$')
+                      .hasMatch(value)) {
                     return 'Invalid email type.';
                   }
                   return null;
@@ -107,11 +109,14 @@ class _NewUserPageState extends State<NewUserPage> {
                   if (value == null || value.isEmpty) {
                     return 'Password is a required field.';
                   }
-                  
-                  if (value.length < 8  ||  !RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$').hasMatch(value)) {
+
+                  if (value.length < 8 ||
+                      !RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$')
+                          .hasMatch(value)) {
                     return 'A minimum 8 characters password containing a combination of uppercase and lowercase letters and numbers is required';
                   }
-                  return null; },
+                  return null;
+                },
                 onChanged: (value) {
                   setState(() {
                     _password = value;
@@ -123,6 +128,7 @@ class _NewUserPageState extends State<NewUserPage> {
                   labelText: 'Retype Password',
                 ),
                 obscureText: true,
+                //this is yusuf assefa code added
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please retype your password';
