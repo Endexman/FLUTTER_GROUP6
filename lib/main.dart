@@ -57,6 +57,12 @@ class _NewUserPageState extends State<NewUserPage> {
               ),
               TextFormField(
                 decoration: InputDecoration(labelText: 'Last Name'),
+                 validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Last name is a required field.';
+                  }
+                  return null;
+                },
                 onChanged: (value) {
                   setState(() {
                     _lastName = value;
@@ -107,6 +113,12 @@ class _NewUserPageState extends State<NewUserPage> {
                 },
               ),
               SizedBox(height: 16.0),
+              Center(
+                child: ElevatedButton(
+                  onPressed: _createUser,
+                  child: Text('Create User'),
+                ),
+              ),
             ],
           ),
         ),
@@ -115,3 +127,4 @@ class _NewUserPageState extends State<NewUserPage> {
   }
 }
 
+ 
