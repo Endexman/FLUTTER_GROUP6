@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(MaterialApp(
-     debugShowCheckedModeBanner: false,
+    debugShowCheckedModeBanner: false,
     home: NewUserPage(),
   ));
 }
@@ -57,6 +57,12 @@ class _NewUserPageState extends State<NewUserPage> {
               ),
               TextFormField(
                 decoration: InputDecoration(labelText: 'Last Name'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Last name is a required field.';
+                  }
+                  return null;
+                },
                 onChanged: (value) {
                   setState(() {
                     _lastName = value;
@@ -65,7 +71,6 @@ class _NewUserPageState extends State<NewUserPage> {
               ),
               TextFormField(
                 decoration: InputDecoration(labelText: 'Email'),
-               
                 onChanged: (value) {
                   setState(() {
                     _email = value;
@@ -82,12 +87,13 @@ class _NewUserPageState extends State<NewUserPage> {
                       });
                     },
                     child: Icon(
-                      _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                      _passwordVisible
+                          ? Icons.visibility
+                          : Icons.visibility_off,
                     ),
                   ),
                 ),
                 obscureText: !_passwordVisible,
-                
                 onChanged: (value) {
                   setState(() {
                     _password = value;
@@ -99,7 +105,6 @@ class _NewUserPageState extends State<NewUserPage> {
                   labelText: 'Retype Password',
                 ),
                 obscureText: true,
-                
                 onChanged: (value) {
                   setState(() {
                     _retypePassword = value;
@@ -107,6 +112,12 @@ class _NewUserPageState extends State<NewUserPage> {
                 },
               ),
               SizedBox(height: 16.0),
+              Center(
+                child: ElevatedButton(
+                  onPressed: _createUser,
+                  child: Text('Create User'),
+                ),
+              ),
             ],
           ),
         ),
@@ -114,4 +125,3 @@ class _NewUserPageState extends State<NewUserPage> {
     );
   }
 }
-
